@@ -1,0 +1,15 @@
+button {
+    padding: 5px;
+    cursor: pointer;
+    width: calc(18px + 2vmin);
+    height: calc(18px + 2vmin);
+    border-radius: 4px;
+
+    &:focus {
+        outline: none;
+    }
+    
+    .icon {
+        width: 100%;
+    }
+}

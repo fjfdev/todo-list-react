@@ -1,0 +1,21 @@
+.Todo {
+    width: 75%;
+    padding: 10px;
+    border-bottom: 1px solid white;
+
+    input {
+        background-color: #282c34;
+        color: white;
+        border: none;
+        border-bottom: 1px solid white;
+        font-size: calc(10px + 2vmin);
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    .IconButton {
+        float: right;
+    }
+}
