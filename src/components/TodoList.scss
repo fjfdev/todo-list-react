@@ -1,0 +1,17 @@
+.Todo-container {
+    width: 75%;
+
+    .remove-todo {
+        float: left;
+        background-color: transparent;
+        border: none;
+        color: white;
+        margin-top: 10px;
+
+        img {
+            background-color: rgba(256, 256, 256, 0.5);
+            border-radius: 15px;
+            width: 70%;
+        }
+    }
+}
