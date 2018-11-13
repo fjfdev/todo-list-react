@@ -1,25 +1,25 @@
 import React from 'react';
+import IconButton from './IconButton';
 
 import editIcon from '../img/edit-regular.svg';
 import confirmIcon from '../img/check-circle-regular.svg';
-import IconButton from './IconButton';
 
 import './Todo.scss';
 
 class Todo extends React.Component {
+
     constructor(props) {
         super(props);
         this.state = {
-            todoValue: props.value,
-            action: 'read'
+            isEditMode: false
         }
     }
 
     getTodoForRead() {
         return (
             <div className='Todo'>
-                <span>{ this.state.todoValue }</span>
-                <IconButton icon={ editIcon } iconAltText="Edit" onClick={ this.onClickEdit }></IconButton>
+                <span>{ this.props.value }</span>      
+                <IconButton icon={ editIcon } iconAltText="Edit" onClick={ () => this.onClickEdit() }></IconButton>      
             </div>
         );
     }
@@ -27,38 +27,31 @@ class Todo extends React.Component {
     getTodoForEdit() {
         return (
             <div className='Todo'>
-                <input type='text' value={ this.state.todoValue } onChange={ this.onChangeTodoValue }/>
-                <IconButton icon={ confirmIcon } iconAltText="Confirm" onClick={ this.onClickConfirm }></IconButton>
+                <input type='text' defaultValue={ this.props.value } ref={ todoRef => this.todoInputRef = todoRef }/>
+                <IconButton icon={ confirmIcon } iconAltText="Confirm" onClick={ () => this.onClickConfirm() }></IconButton>
             </div>
         );
     }
 
     onClickEdit = () => {
         this.setState(() => ({
-            action: 'edit'
+            isEditMode: true
         }));
     }
 
     onClickConfirm = () => {
         this.setState(() => ({
-            action: 'read'
+            isEditMode: false
         }));
-    }
-
-    onChangeTodoValue = (event) => {
-        this.setState({
-            todoValue: event.target.value
-        });
+        this.props.onEdit(this.props.value, this.todoInputRef.value);
     }
 
     render() {
-        switch (this.state.action) {
-            case 'read':
-                return this.getTodoForRead();
-            case 'edit':
-                return this.getTodoForEdit();
-            default:
-                return <span>TODO ERROR</span>
+        if (this.state.isEditMode) {
+            return this.getTodoForEdit();
+        }
+        else {
+            return this.getTodoForRead();
         }
     }
 }
