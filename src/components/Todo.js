@@ -18,8 +18,8 @@ class Todo extends React.Component {
     getTodoForRead() {
         return (
             <div className='Todo'>
-                <span>{ this.props.value }</span>      
-                <IconButton icon={ editIcon } iconAltText="Edit" onClick={ () => this.onClickEdit() }></IconButton>      
+                <span>{ this.props.todoItem.value }</span>      
+                <IconButton icon={ editIcon } iconAltText="Edit" onClick={ () => this.onClickEdit() }>Edit</IconButton>      
             </div>
         );
     }
@@ -27,8 +27,10 @@ class Todo extends React.Component {
     getTodoForEdit() {
         return (
             <div className='Todo'>
-                <input type='text' defaultValue={ this.props.value } ref={ todoRef => this.todoInputRef = todoRef }/>
-                <IconButton icon={ confirmIcon } iconAltText="Confirm" onClick={ () => this.onClickConfirm() }></IconButton>
+                <form id="myFOrm" onSubmit={ () => this.onClickConfirm() }>
+                    <input type='text' name="todoValue" defaultValue={ this.props.todoItem.value } ref={ todoRef => this.todoInputRef = todoRef }/>
+                    <IconButton type="submit" icon={ confirmIcon } iconAltText="Confirm" onClick={ () => this.onClickConfirm() }>Confirm</IconButton>
+                </form>
             </div>
         );
     }
@@ -43,7 +45,7 @@ class Todo extends React.Component {
         this.setState(() => ({
             isEditMode: false
         }));
-        this.props.onEdit(this.props.value, this.todoInputRef.value);
+        this.props.onEdit(this.props.todoItem, this.todoInputRef.value);
     }
 
     render() {

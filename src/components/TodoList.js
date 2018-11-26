@@ -19,7 +19,7 @@ class TodoList extends React.Component {
         return (
             <div className="Todo-container" key={todoKey}>
                 <IconButton className="remove-todo" icon={ deleteIcon } iconAltText="Delete" onClick={ () => this.deleteTodo(todoKey) }/>
-                <Todo value={ todo.value } onEdit={ this.onEditTodo }/>
+                <Todo todoItem={ todo } onEdit={ this.onEditTodo }/>
             </div>
         );
     }
@@ -31,9 +31,10 @@ class TodoList extends React.Component {
     onClickAdd = () => {
         const newTodo = {
             value: "New TODO",
+            id: this.state.todoItems.length + 1
         };
 
-        if (this.doesTodoExists(newTodo.value)) {
+        if (this.isValidValueForTodo(newTodo, newTodo.value)) {
             alert(`'${newTodo.value}' already exists, rename it and try again`)
         }
         else {
@@ -43,13 +44,13 @@ class TodoList extends React.Component {
         }
     }
 
-    onEditTodo = (oldValue, newValue) => {
-        if (this.doesTodoExists(newValue)) {
+    onEditTodo = (todoItem, newValue) => {
+        if (this.isValidValueForTodo(todoItem, newValue)) {
             alert(`'${newValue}' already exists, rename it and try again`)
         }
         else {
             const newItems =  [...this.state.todoItems].map( (todo) => {
-                if (todo.value === oldValue) {
+                if (todo.id === todoItem.id) {
                     todo.value = newValue;
                 }
                 return todo;
@@ -68,18 +69,17 @@ class TodoList extends React.Component {
         });
     }
 
-    doesTodoExists(todoValueForCheck) {
+    isValidValueForTodo(todoItem, valueForCheck) {
         return [...this.state.todoItems]
-            .map( (todo) => todo.value === todoValueForCheck )
+            .filter( (todo) => todo.id !== todoItem.id)
+            .map( (todo) => todo.value === valueForCheck )
             .reduce( (a, b) => a || b, false);
     }
 
     render() {
         return (
             <Fragment>
-                <span>
-                Add new  <IconButton icon={ addButton } iconAltText="Add new" onClick={ this.onClickAdd }></IconButton> 
-                </span>
+                <IconButton icon={ addButton } iconAltText="Add new" onClick={ this.onClickAdd }>Add new</IconButton>
                 { this.getTodoList() }
             </Fragment>
         );

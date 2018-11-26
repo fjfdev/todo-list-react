@@ -7,6 +7,7 @@ class IconButton extends React.Component {
         return (
             <button className={'IconButton ' + this.props.className} onClick={ this.props.onClick }>
                 <img className='icon' src={ this.props.icon } alt={ this.props.iconAltText }/>
+                <span className='textContent'>{ this.props.children }</span>
             </button>
         )
     }

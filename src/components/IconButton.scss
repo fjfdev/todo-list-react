@@ -1,8 +1,6 @@
 button {
     padding: 5px;
     cursor: pointer;
-    width: calc(18px + 2vmin);
-    height: calc(18px + 2vmin);
     border-radius: 4px;
 
     &:focus {
@@ -10,6 +8,14 @@ button {
     }
     
     .icon {
-        width: 100%;
+        vertical-align: top;
+        width: calc(5px + 2vmin);
+        height: calc(5px + 2vmin);
+    }
+
+    .textContent {
+        font-size: 19px;
+        margin-left: 3px;
+        vertical-align: top;
     }
 }

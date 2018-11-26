@@ -1,5 +1,6 @@
 .Todo-container {
     width: 75%;
+    margin-top: 15px;
 
     .remove-todo {
         float: left;
@@ -11,7 +12,6 @@
         img {
             background-color: rgba(256, 256, 256, 0.5);
             border-radius: 15px;
-            width: 70%;
         }
     }
 }
