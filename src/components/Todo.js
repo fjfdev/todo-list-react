@@ -27,7 +27,7 @@ class Todo extends React.Component {
     getTodoForEdit() {
         return (
             <div className='Todo'>
-                <form id="myFOrm" onSubmit={ () => this.onClickConfirm() }>
+                <form onSubmit={ () => this.onClickConfirm() }>
                     <input type='text' name="todoValue" defaultValue={ this.props.todoItem.value } ref={ todoRef => this.todoInputRef = todoRef }/>
                     <IconButton type="submit" icon={ confirmIcon } iconAltText="Confirm" onClick={ () => this.onClickConfirm() }>Confirm</IconButton>
                 </form>
