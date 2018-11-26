@@ -11,14 +11,15 @@ class TodoList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            todoItems: []
+            todoItems: [],
+            nextIndex: 0,
         };
     }
 
     getTodoElement(todo, todoKey) {
         return (
             <div className="Todo-container" key={todoKey}>
-                <IconButton className="remove-todo" icon={ deleteIcon } iconAltText="Delete" onClick={ () => this.deleteTodo(todoKey) }/>
+                <IconButton className="remove-todo" icon={ deleteIcon } iconAltText="Delete" onClick={ () => this.deleteTodo(todo) }/>
                 <Todo todoItem={ todo } onEdit={ this.onEditTodo }/>
             </div>
         );
@@ -31,7 +32,7 @@ class TodoList extends React.Component {
     onClickAdd = () => {
         const newTodo = {
             value: "New TODO",
-            id: this.state.todoItems.length + 1
+            id: this.state.nextIndex
         };
 
         if (this.isValidValueForTodo(newTodo, newTodo.value)) {
@@ -39,7 +40,8 @@ class TodoList extends React.Component {
         }
         else {
             this.setState( (state, props) => ({
-                todoItems: [...state.todoItems, newTodo]
+                todoItems: [...state.todoItems, newTodo],
+                nextIndex: state.nextIndex + 1 
             }));
         }
     }
@@ -61,9 +63,9 @@ class TodoList extends React.Component {
         }
     }
 
-    deleteTodo(todoIndex) {
-        const copyItems = [...this.state.todoItems];
-        copyItems.splice(todoIndex, 1);
+    deleteTodo(todoItem) {
+        const copyItems = [...this.state.todoItems]
+            .filter( (todo) => todo.id !== todoItem.id);
         this.setState({
             todoItems: copyItems
         });
