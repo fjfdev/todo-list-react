@@ -2,14 +2,15 @@ import React, { Component } from 'react';
 
 import './App.scss';
 import TodoList from './components/TodoList';
+import HeaderTitle from './components/HeaderTitle'
 
 class App extends Component {
   
   render() {
     return (
       <div className='App-container'>
-          <h2>The TODO list</h2>
-          <TodoList></TodoList>
+        <HeaderTitle/>
+        <TodoList></TodoList>
       </div>
     );
   }
