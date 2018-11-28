@@ -1,0 +1,9 @@
+{
+  "extends": "fbjs",
+  "rules": {
+    "object-curly-spacing": [
+      "error",
+      "always"
+    ]
+  }
+}
