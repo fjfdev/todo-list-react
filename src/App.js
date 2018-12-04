@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import './App.scss';
 import TodoList from './components/TodoList';
-import HeaderTitle from './components/HeaderTitle'
+import HeaderTitle from './components/ui/HeaderTitle'
 
 class App extends Component {
   

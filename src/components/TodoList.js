@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import Todo from './Todo';
-import IconButton from './IconButton';
+import IconButton from './ui/IconButton';
 
 import './TodoList.scss';
 import deleteIcon from '../img/times-circle-regular.svg';
@@ -18,6 +18,7 @@ class TodoList extends React.Component {
   onClickAdd = () => {
     const newTodo = {
       value: 'New TODO',
+      completed: false,
       id: this.state.nextIndex,
     };
     this.setState((state, props) => ({
@@ -44,6 +45,18 @@ class TodoList extends React.Component {
     }));
   }
 
+  onCompleteTodo = (todoItem) => {
+    const newItems = this.state.todoItems.map(todo => {
+      if (todo.id === todoItem.id) {
+        todo.completed = !todo.completed;
+      }
+      return { ...todo };
+    });
+    this.setState({
+      todoItems: newItems,
+    });
+  };
+
   getTodoElement(todo) {
     return (
       <div className="Todo-container" key={todo.id}>
@@ -53,7 +66,7 @@ class TodoList extends React.Component {
           iconAltText="Delete"
           onClick={() => this.deleteTodo(todo)}
         />
-        <Todo todoItem={todo} onEdit={this.onEditTodo} />
+        <Todo todoItem={todo} onEdit={this.onEditTodo} onCompleteTodo={this.onCompleteTodo}/>
       </div>
     );
   }
@@ -66,6 +79,7 @@ class TodoList extends React.Component {
     return (
       <Fragment>
         <IconButton
+          className='add-todo'
           iconSrc={addButton}
           iconAltText="Add new"
           onClick={this.onClickAdd}

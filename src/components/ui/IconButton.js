@@ -8,7 +8,7 @@ const IconButton = ({
   onClick,
   textContent,
 }) => (
-  <button className={'IconButton ' + className} onClick={onClick}>
+  <button className={'IconButton ' + (className ? className : '') } onClick={onClick}>
     <img className="icon" src={iconSrc} alt={iconAltText} />
     <span className="textContent">{textContent}</span>
   </button>

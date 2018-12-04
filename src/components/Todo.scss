@@ -1,20 +1,45 @@
 .Todo {
+    display: flex;
+    justify-content: space-between;
     padding: 10px;
     border-bottom: 1px solid white;
 
-    input {
-        background-color: #282c34;
-        color: white;
-        border: none;
-        border-bottom: 1px solid white;
-        font-size: calc(10px + 2vmin);
+    @media (max-width: 570px) {
+        flex-direction: column;
+    }
 
-        &:focus {
-            outline: none;
+    .completed {
+        text-decoration: line-through;
+    }
+
+    form {
+        display: flex;
+        flex: 1;
+        justify-content: space-between;
+
+        @media (max-width: 570px) {
+            flex-direction: column;
+        }
+
+        input {
+            background-color: #282c34;
+            color: white;
+            border: none;
+            border-bottom: 1px solid white;
+            font-size: inherit;
+
+            &:focus {
+                outline: none;
+            }
         }
     }
 
     .IconButton {
-        float: right;
+        margin-right: 10px;
+        vertical-align: middle;
+
+        @media (max-width: 570px) {
+            margin-top: 10px;
+        }
     }
 }
