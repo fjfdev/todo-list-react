@@ -1,9 +1,11 @@
 import React from 'react';
-import IconButton from './ui/IconButton';
+import IconButton from '../ui/IconButton';
 
-import editIcon from '../img/edit-regular.svg';
-import confirmIcon from '../img/check-circle-regular.svg';
-import completeIcon from '../img/check-square-regular.svg';
+import editIcon from '../../img/edit-regular.svg';
+import confirmIcon from '../../img/check-circle-regular.svg';
+import completedIcon from '../../img/check-square-regular.svg';
+import unCompletedIcon from '../../img/square-regular.svg';
+
 
 import './Todo.scss';
 
@@ -22,14 +24,16 @@ class Todo extends React.Component {
       <div className="Todo">
         <span className={ todoItem.completed ? 'completed' : '' }>{todoItem.value}</span>
         <div className="TodoActions">
+          { !todoItem.completed ?
+            <IconButton
+              iconSrc={editIcon}
+              iconAltText="Edit"
+              onClick={() => this.onClickEdit()}
+              textContent="Edit"
+            /> : ''
+          }
           <IconButton
-            iconSrc={editIcon}
-            iconAltText="Edit"
-            onClick={() => this.onClickEdit()}
-            textContent="Edit"
-          />
-          <IconButton
-            iconSrc={completeIcon}
+            iconSrc={ todoItem.completed ? completedIcon : unCompletedIcon}
             iconAltText={ todoItem.completed ? "Uncomplete" : "Complete" }
             onClick={() => onCompleteTodo(todoItem)}
             textContent={ todoItem.completed ? "Uncomplete" : "Complete" }
