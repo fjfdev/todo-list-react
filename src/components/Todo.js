@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import IconButton from './ui/IconButton';
 
 import editIcon from '../img/edit-regular.svg';
@@ -8,29 +8,25 @@ import unCompletedIcon from '../img/square-regular.svg';
 
 import './Todo.scss';
 
-class Todo extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isEditMode: false,
-    };
-  }
+const Todo = ({ todoItem, onCompleteTodo, onEdit }) => {
+  const [isEditMode, setEditMode] = useState(false);
+  let todoInputRef;
 
-  getTodoForRead() {
-    const { todoItem, onCompleteTodo } = this.props;
-
+  const getTodoForRead = () => {
     return (
       <div className="Todo">
-        <span className={ todoItem.completed ? 'completed' : '' }>{todoItem.value}</span>
+        <span className={ todoItem.completed ? 'completed' : '' }>
+          {todoItem.value}
+        </span>
         <div className="TodoActions">
           { 
             !todoItem.completed ?
-            <IconButton
-              iconSrc={editIcon}
-              iconAltText="Edit"
-              onClick={() => this.onClickEdit()}
-              textContent="Edit"
-            /> : ''
+              <IconButton
+                iconSrc={editIcon}
+                iconAltText="Edit"
+                onClick={ onClickEdit }
+                textContent="Edit"
+              /> : ''
           }
           <IconButton
             iconSrc={ todoItem.completed ? completedIcon : unCompletedIcon }
@@ -41,24 +37,23 @@ class Todo extends React.Component {
         </div>
       </div>
     );
-  }
+  };
 
-  getTodoForEdit() {
-    const { todoItem } = this.props;
+  const getTodoForEdit = () =>  {
     return (
       <div className="Todo">
-        <form onSubmit={() => this.onClickConfirm()}>
+        <form onSubmit={ onClickConfirm }>
           <input
             type="text"
             name="todoValue"
             defaultValue={todoItem.value}
-            ref={todoRef => (this.todoInputRef = todoRef)}
+            ref={todoRef => (todoInputRef = todoRef)}
           />
           <IconButton
             type="submit"
             iconSrc={confirmIcon}
             iconAltText="Confirm"
-            onClick={() => this.onClickConfirm()}
+            onClick={ onClickConfirm }
             textContent="Confirm"
           />
         </form>
@@ -66,27 +61,16 @@ class Todo extends React.Component {
     );
   }
 
-  onClickEdit = () => {
-    this.setState(() => ({
-      isEditMode: true,
-    }));
+  const onClickEdit = () => {
+    setEditMode(true);
   };
 
-  onClickConfirm = () => {
-    const { onEdit, todoItem } = this.props;
-    this.setState(() => ({
-      isEditMode: false,
-    }));
-    onEdit(todoItem, this.todoInputRef.value);
+  const onClickConfirm = () => {
+    setEditMode(false);
+    onEdit(todoItem, todoInputRef.value);
   };
 
-  render() {
-    if (this.state.isEditMode) {
-      return this.getTodoForEdit();
-    } else {
-      return this.getTodoForRead();
-    }
-  }
+  return (isEditMode ? getTodoForEdit() : getTodoForRead());
 }
 
 export default Todo;
