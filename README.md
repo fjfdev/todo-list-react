@@ -9,7 +9,7 @@
 <h4 align="center">A simple application for managing a todo list built with <a href="https://reactjs.org" target="_blank">React</a>.</h4>
 
 <p align="center">
-  <img src="./img/appScreenshot.png" width="550"></a>
+  <img src="./img/appScreenshot.png" width="650"></a>
 </p>
 
 
