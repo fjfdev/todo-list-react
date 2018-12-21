@@ -9,15 +9,6 @@
 <h4 align="center">A simple application for managing a todo list built with <a href="https://reactjs.org" target="_blank">React</a>.</h4>
 
 <p align="center">
-  <a href="#key-features">Key Features</a> •
-  <a href="#how-to-use">How To Use</a> •
-  <a href="#download">Download</a> •
-  <a href="#credits">Credits</a> •
-  <a href="#related">Related</a> •
-  <a href="#license">License</a>
-</p>
-
-<p align="center">
   <img src="./img/appScreenshot.png" width="550"></a>
 </p>
 
